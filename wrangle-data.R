@@ -1,0 +1,30 @@
+library(tidyverse)
+library(readr)
+base_sindrome_combinado <- read_csv("data/baseSindromeCombinado.csv", col_names = TRUE, locale = locale(encoding="latin1"))
+base_sindrome_combinado <- type_convert(base_sindrome_combinado)
+base_sindrome_combinado <- as_tibble(base_sindrome_combinado)
+str(base_sindrome_combinado)
+
+## Convirtiendo las variables de acuerdo a tipo de datos
+base_sindrome_combinado$grupo <- as.factor(base_sindrome_combinado$grupo)
+base_sindrome_combinado$sexo <- as.factor(base_sindrome_combinado$sexo)
+base_sindrome_combinado$tabaquismo <- as.factor(base_sindrome_combinado$tabaquismo)
+base_sindrome_combinado$uso_de_leña <- as.factor(base_sindrome_combinado$uso_de_leña)
+base_sindrome_combinado$iehl <- as.numeric(base_sindrome_combinado$iehl)
+base_sindrome_combinado$peso_kg <- as.numeric(base_sindrome_combinado$peso_kg)
+base_sindrome_combinado$imc <- as.numeric(base_sindrome_combinado$imc)
+base_sindrome_combinado$talla_mts <- as.numeric(base_sindrome_combinado$talla_mts)
+base_sindrome_combinado$drb_alelo1 <- as.factor(base_sindrome_combinado$drb_alelo1)
+base_sindrome_combinado$drb_alelo2 <- as.factor(base_sindrome_combinado$drb_alelo2)
+base_sindrome_combinado$dqb1_alelo1 <- as.factor(base_sindrome_combinado$dqb1_alelo1)
+base_sindrome_combinado$dqb1_alelo2 <- as.factor(base_sindrome_combinado$dqb1_alelo2)
+base_sindrome_combinado$contacto_aves <- as.factor(base_sindrome_combinado$contacto_aves)
+base_sindrome_combinado$exposicion_ocupacional <- as.factor(base_sindrome_combinado$exposicion_ocupacional)
+base_sindrome_combinado$producto_exposicion_ocupacional <- as.factor(base_sindrome_combinado$producto_exposicion_ocupacional)
+base_sindrome_combinado$saturacion_oxigeno <- as.numeric(base_sindrome_combinado$saturacion_oxigeno)
+str(base_sindrome_combinado)
+
+## Solo columnas para demograficos y tablas
+
+base_sc <- base_sindrome_combinado|> select(clave_muestra, grupo, edad, sexo,saturacion_oxigeno, drb_alelo1, drb_alelo2, dqb1_alelo1, dqb1_alelo2,tabaquismo, indice_tabaquico, uso_de_leña, iehl, exposicion_ocupacional,producto_exposicion_ocupacional,contacto_aves)
+save(base_sc, file = "rdata/base_sc.rda")
