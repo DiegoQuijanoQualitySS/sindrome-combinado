@@ -1,0 +1,20 @@
+---
+title: "Reporte Sindrome Combinado"
+author: "Daniela Guadalupe Valencia Pérez Rea"
+date: "2025-11-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+load("rdata/base_sc.rda")
+options(tibble.width = Inf)
+```
+Mostrando tabla
+
+```{r tabla,echo=FALSE}
+base_sc|>ggplot(aes(edad,color=grupo))+
+  geom_density()
+```
+
